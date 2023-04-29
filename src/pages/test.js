@@ -1,9 +1,12 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
+import {atom, useAtom} from "jotai";
+
+const chessBoardAtom = atom(new Chess());
 
 export default function PlayRandomMoveEngine() {
-    const [game, setGame] = useState(new Chess());
+    const [game, setGame] = useAtom(chessBoardAtom);
 
     function makeAMove(move) {
         const gameCopy = new Chess(game.fen());
