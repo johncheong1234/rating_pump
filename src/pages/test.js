@@ -3,9 +3,23 @@ import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 
 export default function PlayRandomMoveEngine() {
-    const [game, setGame] = useState(new Chess(
-        'r1k4r/p2nb1p1/2b4p/1p1n1p2/2PP4/3Q1NB1/1P3PPP/R5K1 b - - 0 19'
-    ));
+    const [game, setGame] = useState(new Chess());
 
-    return <Chessboard position={game.fen()} />;
+    function makeAMove(move) {
+        const gameCopy = new Chess(game.fen());
+
+        const result = gameCopy.move(move);
+        setGame(gameCopy);
+        return result; // null if the move was illegal, the move object if the move was legal
+    }
+
+    function onDrop(sourceSquare, targetSquare) {
+        makeAMove({
+            from: sourceSquare,
+            to: targetSquare,
+            promotion: "q", // always promote to a queen for example simplicity
+        });
+    }
+
+    return <Chessboard position={game.fen()} onPieceDrop={onDrop} />;
 }
