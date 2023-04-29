@@ -21,5 +21,5 @@ export default function PlayRandomMoveEngine() {
         });
     }
 
-    return <Chessboard position={game.fen()} onPieceDrop={onDrop} />;
+    return <Chessboard position={game.fen()} onPieceDrop={onDrop} boardWidth= {800} />;
 }
