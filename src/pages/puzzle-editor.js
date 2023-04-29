@@ -165,6 +165,9 @@ export default function PlayRandomMoveEngine() {
         return fenString;
     }
 
+    function handleSquareRightClick(square, piece) {
+        console.log(square, piece, ' square, piece')
+    }
 
     return (
         <div style={{
@@ -178,11 +181,14 @@ export default function PlayRandomMoveEngine() {
                     display: "flex",
                     flexDirection: "column",
                     width: "fit-content",
+
                 }}
             >
                 <Chessboard position={game.fen()} onPieceDrop={onDrop} boardWidth={
                     600
-                } />
+                } 
+                onSquareRightClick={handleSquareRightClick}
+                />
                 <div id='fen-string-container'>
                     <input
                         style={{
